@@ -44,13 +44,23 @@ class Core {
             // check to se if method exists in controller
             if(method_exists($this->currentController, $url[1])) {
                 $this->currentMethod= $url[1];
+                
+                // Unset index
+                unset($url[1]);
             }
         }
-        echo $this->currentMethod;
+        //echo $this->currentMethod;
+        
+         // Get params
+    $this->params = $url ? array_values($url) :[];
+    
+    // call a callback
+    call_user_func_array([$this->currentController, $this->currentMethod],$this->params);
+        
     }
     
     
-    // Get params
+   
     
     // 
     
